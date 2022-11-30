@@ -1,0 +1,11 @@
+#submit{
+ margin-left: 130px;
+ margin-top: 50px;
+  display: block;
+}
+#form{
+    width: 400px;
+}
+input[type="text"]{
+    width: 100px;
+}

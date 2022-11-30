@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age calculator</title>
+    <link rel="stylesheet" href="styles.css"/>
+  </head>
+  <body>
+    <h1>Age calculator</h1>
+    <form action="#" id="form">
+      <input type="text" name="date" id="date"  minlength="1" maxlength="2" />
+      <input type="text" name="month" id="month"  minlength="1" maxlength="2" />
+      <input type="text" name="year" id="year" minlength="4" maxlength="4"/>
+      <input type="submit" id="submit" name="submit" />
+    </form>
+    <p id="error"></p>
+    <p id="result"></p>
+  </body>
+  <script>
+    let formid = document.getElementById("form");
+    formid.onsubmit = (e) => {
+      e.preventDefault();
+      let inputall = document.querySelectorAll("input");
+      let error=false
+      inputall.forEach((ele) => {
+        if (ele.name != "submit") {
+          let value = ele.value;
+          let res = new RegExp(/[a-zA-z]/);
+          let checkedvalue = res.test(value);
+          if (checkedvalue) {
+            document.getElementById("error").innerHTML=`invalid `;  
+            error=true
+          }
+        }
+      });
+
+      if(!error){
+        let currenttime=new Date()
+        let curryear=currenttime.getFullYear()
+        let currmonth=currenttime.getMonth()+1
+        let currdate=currenttime.getDate()
+        let reqyear=parseInt(document.getElementById("year").value)
+        let reqmonth=parseInt(document.getElementById("month").value)
+        let reqdate=parseInt(document.getElementById("date").value)
+        let remaingdays=(12-reqmonth)*31+(31-reqdate)
+        let currentdays=(currmonth*31)-(31-currdate)
+        let totalyear=curryear-reqyear
+        let totaldays=remaingdays+currentdays
+        let month=parseInt(totaldays/31)
+        let days=totaldays%31
+        document.getElementById("result").innerHTML=`Your age is ${totalyear} years ${month} months ${days} days`
+      }
+    };
+  </script>
+</html>
