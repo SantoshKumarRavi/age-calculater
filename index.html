@@ -44,13 +44,22 @@
         let reqyear=parseInt(document.getElementById("year").value)
         let reqmonth=parseInt(document.getElementById("month").value)
         let reqdate=parseInt(document.getElementById("date").value)
-        let remaingdays=(12-reqmonth)*31+(31-reqdate)
-        let currentdays=(currmonth*31)-(31-currdate)
-        let totalyear=curryear-reqyear
-        let totaldays=remaingdays+currentdays
-        let month=parseInt(totaldays/31)
-        let days=totaldays%31
-        document.getElementById("result").innerHTML=`Your age is ${totalyear} years ${month} months ${days} days`
+    let month = [31, 28, 31, 30, 31, 30, 31,31, 30, 31, 30, 31 ]
+    if (reqdate > currdate) {
+      currdate = currdate + month[reqmonth - 1];
+      currmonth = currmonth - 1;
+    }
+ 
+    if (reqmonth > currmonth) {
+      curryear = curryear - 1;
+      currmonth = currmonth + 12;
+    }
+ 
+    var calculated_date = currdate - reqdate;
+    var calculated_month = currmonth - reqmonth;
+    var calculated_year = curryear - reqyear;
+
+      document.getElementById("result").innerHTML=`Your age is ${calculated_year} years ${calculated_month} months ${calculated_date} days`
       }
     };
   </script>
